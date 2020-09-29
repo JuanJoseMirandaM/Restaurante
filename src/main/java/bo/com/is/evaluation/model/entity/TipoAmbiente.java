@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "res_tipo_ambientes")
+@Table(name = "RES_TIPO_AMBIENTES")
 public class TipoAmbiente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
