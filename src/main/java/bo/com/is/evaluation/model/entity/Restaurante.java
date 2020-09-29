@@ -1,18 +1,59 @@
 package bo.com.is.evaluation.model.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "res_tipo_ambientes")
-public class ambiente {
+@Table(name = "RES_RESTAURANTES")
+public class Restaurante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull
+    @Size(min = 2, max = 30)
     private String nombre;
 
+    @NotNull
+    @Size(max = 30)
     private String descripcion;
+
+    @NotNull
+    private Integer telefono;
+
+    @NotNull
+    @Size(min=1, max = 10)
+    private String estado;
+
+    @NotNull
+    @Size(max = 300)
+    private String logo;
+
+    @NotNull
+    @Size(max = 30)
+    private String horario;
+
+    @NotNull
+    @Size(max = 300)
+    private String latitud;
+
+    @NotNull
+    @Size(max = 300)
+    private String longitud;
+
+    @NotNull
+    @Size(max = 300)
+    private String direccion;
+
+    @Column(name = "id_tipo_comida")
+    @NotNull
+    @NotBlank
+    @Size(max = 10)
+    private Integer idTipoComida;
 
     @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
@@ -38,6 +79,12 @@ public class ambiente {
     @Column(name = "id_usuario_hasta")
     private Integer idUsuarioHasta;
 
+    @OneToMany(mappedBy = "restaurante")
+    private List<RestauranteAmbiente> ambientes;
+
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_comida", insertable = false, updatable = false)
+    private TipoComida tipoComida;
 
     public Integer getId() {
         return id;
@@ -61,6 +108,70 @@ public class ambiente {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Integer getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(Integer telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Integer getIdTipoComida() {
+        return idTipoComida;
+    }
+
+    public void setIdTipoComida(Integer idTipoComida) {
+        this.idTipoComida = idTipoComida;
     }
 
     public LocalDateTime getFechaAlta() {

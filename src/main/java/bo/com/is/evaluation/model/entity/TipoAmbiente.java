@@ -2,19 +2,18 @@ package bo.com.is.evaluation.model.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "res_restaurante_ambientes")
-public class restauranteAmbiente {
+@Table(name = "res_tipo_ambientes")
+public class TipoAmbiente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "id_restaurante")
-    private Integer idRestaurante;
+    private String nombre;
 
-    @Column(name = "id_tipo_ambiente")
-    private Integer idTipoAmbiente;
+    private String descripcion;
 
     @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
@@ -40,6 +39,8 @@ public class restauranteAmbiente {
     @Column(name = "id_usuario_hasta")
     private Integer idUsuarioHasta;
 
+    @OneToMany(mappedBy = "tipoAmbiente")
+    private List<RestauranteAmbiente> restaurantes;
 
     public Integer getId() {
         return id;
@@ -49,20 +50,20 @@ public class restauranteAmbiente {
         this.id = id;
     }
 
-    public Integer getIdRestaurante() {
-        return idRestaurante;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setIdRestaurante(Integer idRestaurante) {
-        this.idRestaurante = idRestaurante;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public Integer getIdTipoAmbiente() {
-        return idTipoAmbiente;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setIdTipoAmbiente(Integer idTipoAmbiente) {
-        this.idTipoAmbiente = idTipoAmbiente;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public LocalDateTime getFechaAlta() {

@@ -2,31 +2,45 @@ package bo.com.is.evaluation.model.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "RES_RESTAURANTES")
-public class restaurante {
+@Table(name = "res_tipo_comidas")
+public class TipoComida {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String nombre;
-    private String descripcion;
-    private Integer telefono;
-    private String estado;
-    private String logo;
-    private String horario;
-    private String latitud;
-    private String longitud;
-    private String direccion;
 
-    @Column(name = "id_tipo_comida")
-    private Integer idTipoComida;
+    private String descripcion;
 
     @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
 
+    @Column(name = "id_usuario_alta")
+    private Integer idUsuarioAlta;
+
+    @Column(name = "fecha_baja")
+    private LocalDateTime fechaBaja;
+
+    @Column(name = "id_usuario_baja")
+    private Integer idUsuarioBaja;
+
+    @Column(name = "fecha_desde")
+    private LocalDateTime fechaDesde;
+
+    @Column(name = "id_usuario_desde")
+    private Integer idUsuarioDesde;
+
+    @Column(name = "fecha_hasta")
+    private LocalDateTime fechaHasta;
+
+    @Column(name = "id_usuario_hasta")
+    private Integer idUsuarioHasta;
+
+    @OneToMany(mappedBy = "tipoComida")
+    private List<Restaurante> restaurantes;
 
     public Integer getId() {
         return id;
@@ -50,70 +64,6 @@ public class restaurante {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Integer getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(Integer telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getLogo() {
-        return logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
-
-    public String getHorario() {
-        return horario;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
-
-    public String getLatitud() {
-        return latitud;
-    }
-
-    public void setLatitud(String latitud) {
-        this.latitud = latitud;
-    }
-
-    public String getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(String longitud) {
-        this.longitud = longitud;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public Integer getIdTipoComida() {
-        return idTipoComida;
-    }
-
-    public void setIdTipoComida(Integer idTipoComida) {
-        this.idTipoComida = idTipoComida;
     }
 
     public LocalDateTime getFechaAlta() {
@@ -179,27 +129,4 @@ public class restaurante {
     public void setIdUsuarioHasta(Integer idUsuarioHasta) {
         this.idUsuarioHasta = idUsuarioHasta;
     }
-
-    @Column(name = "id_usuario_alta")
-    private Integer idUsuarioAlta;
-
-    @Column(name = "fecha_baja")
-    private LocalDateTime fechaBaja;
-
-    @Column(name = "id_usuario_baja")
-    private Integer idUsuarioBaja;
-
-    @Column(name = "fecha_desde")
-    private LocalDateTime fechaDesde;
-
-    @Column(name = "id_usuario_desde")
-    private Integer idUsuarioDesde;
-
-    @Column(name = "fecha_hasta")
-    private LocalDateTime fechaHasta;
-
-    @Column(name = "id_usuario_hasta")
-    private Integer idUsuarioHasta;
-
-
 }

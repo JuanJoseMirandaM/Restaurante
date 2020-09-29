@@ -4,15 +4,17 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "res_tipo_comidas")
-public class tipoComida {
+@Table(name = "res_restaurante_ambientes")
+public class RestauranteAmbiente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String nombre;
+    @Column(name = "id_restaurante")
+    private Integer idRestaurante;
 
-    private String descripcion;
+    @Column(name = "id_tipo_ambiente")
+    private Integer idTipoAmbiente;
 
     @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
@@ -38,6 +40,13 @@ public class tipoComida {
     @Column(name = "id_usuario_hasta")
     private Integer idUsuarioHasta;
 
+    @ManyToOne
+    @JoinColumn(name = "id_restaurante", insertable = false, updatable = false)
+    private Restaurante restaurante;
+
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_ambiente", insertable = false, updatable = false)
+    private TipoAmbiente tipoAmbiente;
 
     public Integer getId() {
         return id;
@@ -45,22 +54,6 @@ public class tipoComida {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public LocalDateTime getFechaAlta() {
