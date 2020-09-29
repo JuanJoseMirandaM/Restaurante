@@ -51,8 +51,6 @@ public class Restaurante {
 
     @Column(name = "id_tipo_comida")
     @NotNull
-    @NotBlank
-    @Size(max = 10)
     private Integer idTipoComida;
 
     @Column(name = "fecha_alta")

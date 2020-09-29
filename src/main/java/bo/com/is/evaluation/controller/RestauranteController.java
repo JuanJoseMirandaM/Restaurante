@@ -51,7 +51,7 @@ public class RestauranteController {
 
     @PutMapping("/deactivate/{id}")
     public ResponseEntity deactivate(@PathVariable("id") int idRestaurante){
-        if(restaunteService.activate(idRestaurante)){
+        if(restaunteService.deactivate(idRestaurante)){
             return new ResponseEntity(HttpStatus.OK);
         }else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
