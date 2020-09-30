@@ -3,6 +3,8 @@ package bo.com.is.evaluation.service;
 import bo.com.is.evaluation.model.RestauranteRepository;
 import bo.com.is.evaluation.model.entity.Restaurante;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,10 @@ public class RestaunteService {
         return restauranteRepository.getAll();
     }
 
+    public List<Restaurante> getAllRetaurantes(int pageNo, int pageSize, String sortBy) {
+        return restauranteRepository.getAllRestaurantes(pageNo, pageSize, sortBy);
+    }
+
     public Optional<Restaurante> getRestaurante(int restauranteId){
         return restauranteRepository.getRestaurante(restauranteId);
     }
@@ -24,6 +30,11 @@ public class RestaunteService {
     public Optional<List<Restaurante>> getByTipoComida(int tipoComidaId){
         return restauranteRepository.getByTipoComida(tipoComidaId);
     }
+
+    public Optional<List<Restaurante>> getByEstado(String estado){
+        return restauranteRepository.getByEstado(estado);
+    }
+
 
     public Restaurante save(Restaurante restaurante){
         return restauranteRepository.save(restaurante);
