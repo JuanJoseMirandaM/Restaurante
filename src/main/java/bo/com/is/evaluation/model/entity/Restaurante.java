@@ -1,5 +1,7 @@
 package bo.com.is.evaluation.model.entity;
 
+import bo.com.is.evaluation.dto.TipoComidaDto;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -82,6 +84,22 @@ public class Restaurante {
     @ManyToOne
     @JoinColumn(name = "id_tipo_comida", insertable = false, updatable = false)
     private TipoComida tipoComida;
+
+    public List<RestauranteAmbiente> getAmbientes() {
+        return ambientes;
+    }
+
+    public void setAmbientes(List<RestauranteAmbiente> ambientes) {
+        this.ambientes = ambientes;
+    }
+
+    public TipoComida getTipoComida() {
+        return tipoComida;
+    }
+
+    public void setTipoComida(TipoComida tipoComida) {
+        this.tipoComida = tipoComida;
+    }
 
     public Integer getId() {
         return id;

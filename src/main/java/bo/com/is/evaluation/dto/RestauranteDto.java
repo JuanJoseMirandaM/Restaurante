@@ -8,6 +8,11 @@ public class RestauranteDto {
     private String estado;
     private String logo;
     private String horario;
+    private String latitud;
+    private String longitud;
+    private String direccion;
+    private Integer idTipoComida;
+    private TipoComidaDto tipoComida;
 
     public Integer getId() {
         return id;
@@ -97,8 +102,13 @@ public class RestauranteDto {
         this.idTipoComida = idTipoComida;
     }
 
-    private String latitud;
-    private String longitud;
-    private String direccion;
-    private Integer idTipoComida;
+    public TipoComidaDto getTipoComida() {
+        return tipoComida;
+    }
+
+    public void setTipoComidaDto(TipoComidaDto tipoComida) {
+        this.tipoComida = tipoComida;
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package bo.com.is.evaluation.controller;
 
 import bo.com.is.evaluation.dto.RestauranteDto;
+import bo.com.is.evaluation.dto.TipoComidaDto;
 import bo.com.is.evaluation.model.entity.Restaurante;
 import bo.com.is.evaluation.service.RestaunteService;
 import org.modelmapper.ModelMapper;
@@ -36,13 +37,6 @@ public class RestauranteController {
         return new ResponseEntity<>(restaurantesDto, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<RestauranteDto> getRestaurante(@PathVariable("id") int idRestaurante){
-        return restaunteService.getRestaurante(idRestaurante)
-                .map(restaurante -> new ResponseEntity<>(convertToDto(restaurante), HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
     @GetMapping("/tipoComida/{idTipoComida}")
     public ResponseEntity<List<RestauranteDto>> getByTipoComida(@PathVariable("idTipoComida") int idTipoComida){
         return restaunteService.getByTipoComida(idTipoComida)
@@ -60,6 +54,13 @@ public class RestauranteController {
                     List<RestauranteDto> restaurantesDto = restaurantes.stream().map(this::convertToDto).collect(Collectors.toList());
                     return new ResponseEntity<>(restaurantesDto, HttpStatus.OK);
                 })
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RestauranteDto> getRestaurante(@PathVariable("id") int idRestaurante){
+        return restaunteService.getRestaurante(idRestaurante)
+                .map(restaurante -> new ResponseEntity<>(convertToDto(restaurante), HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
@@ -95,6 +96,7 @@ public class RestauranteController {
 
     private RestauranteDto convertToDto(Restaurante restaurante) {
         RestauranteDto restauranteDto = modelMapper.map(restaurante, RestauranteDto.class);
+        restauranteDto.setTipoComidaDto(modelMapper.map(restaurante.getTipoComida(), TipoComidaDto.class));
         return restauranteDto;
     }
 

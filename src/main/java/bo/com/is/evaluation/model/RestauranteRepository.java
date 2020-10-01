@@ -61,4 +61,19 @@ public class RestauranteRepository{
         restauranteCrudRepository.save(restaurante);
     }
 
+    public Optional<Restaurante> getData(String field, Object value)
+    {
+       switch (field)
+       {
+           case "id":
+               return restauranteCrudRepository.findById((Integer)value);
+           case "nombre":
+               return restauranteCrudRepository.findByNombre((String)value);
+           case "telefono":
+               return restauranteCrudRepository.findByTelefono((Integer)value);
+           default:
+               return null;
+       }
+    }
+
 }

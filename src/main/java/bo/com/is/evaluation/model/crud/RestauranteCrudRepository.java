@@ -17,4 +17,7 @@ public interface RestauranteCrudRepository extends CrudRepository<Restaurante, I
 
     Optional<List<Restaurante>> findByIdTipoComida(int idTipoComida);
     Optional<List<Restaurante>> findByEstado(String estado);
+
+    Optional<Restaurante> findByNombre(String nombre);
+    Optional<Restaurante> findByTelefono(int telefono);
 }

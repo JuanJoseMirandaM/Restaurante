@@ -9,7 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TipoComidasRepository extends CrudRepository<TipoComida, Integer> {
-    Iterable<Restaurante> findAll(Sort sort);
-    Page<Restaurante> findAll(Pageable pageable);
+public interface TipoComidaRepository extends CrudRepository<TipoComida, Integer> {
+    Iterable<TipoComida> findAll(Sort sort);
+    Page<TipoComida> findAll(Pageable pageable);
 }

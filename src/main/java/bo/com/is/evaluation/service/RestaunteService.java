@@ -35,6 +35,9 @@ public class RestaunteService {
         return restauranteRepository.getByEstado(estado);
     }
 
+    public Optional<Restaurante> getData(String field, Object value){
+        return restauranteRepository.getData(field, value);
+    }
 
     public Restaurante save(Restaurante restaurante){
         return restauranteRepository.save(restaurante);
