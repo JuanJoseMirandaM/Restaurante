@@ -1,5 +1,7 @@
 package bo.com.is.evaluation.dto;
 
+import java.util.List;
+
 public class RestauranteDto {
     private Integer id;
     private String nombre;
@@ -13,6 +15,7 @@ public class RestauranteDto {
     private String direccion;
     private Integer idTipoComida;
     private TipoComidaDto tipoComida;
+    private List<RestauranteAmbienteDto> restauranteAmbientes;
 
     public Integer getId() {
         return id;
@@ -106,9 +109,15 @@ public class RestauranteDto {
         return tipoComida;
     }
 
-    public void setTipoComidaDto(TipoComidaDto tipoComida) {
+    public void setTipoComida(TipoComidaDto tipoComida) {
         this.tipoComida = tipoComida;
     }
 
+    public List<RestauranteAmbienteDto> getRestauranteAmbientes() {
+        return restauranteAmbientes;
+    }
 
+    public void setRestauranteAmbientes(List<RestauranteAmbienteDto> restauranteAmbientes) {
+        this.restauranteAmbientes = restauranteAmbientes;
+    }
 }

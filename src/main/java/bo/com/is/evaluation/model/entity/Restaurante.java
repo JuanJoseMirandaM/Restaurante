@@ -79,27 +79,11 @@ public class Restaurante {
     private Integer idUsuarioHasta;
 
     @OneToMany(mappedBy = "restaurante")
-    private List<RestauranteAmbiente> ambientes;
+    private List<RestauranteAmbiente> restauranteAmbientes;
 
     @ManyToOne
     @JoinColumn(name = "id_tipo_comida", insertable = false, updatable = false)
     private TipoComida tipoComida;
-
-    public List<RestauranteAmbiente> getAmbientes() {
-        return ambientes;
-    }
-
-    public void setAmbientes(List<RestauranteAmbiente> ambientes) {
-        this.ambientes = ambientes;
-    }
-
-    public TipoComida getTipoComida() {
-        return tipoComida;
-    }
-
-    public void setTipoComida(TipoComida tipoComida) {
-        this.tipoComida = tipoComida;
-    }
 
     public Integer getId() {
         return id;
@@ -251,5 +235,21 @@ public class Restaurante {
 
     public void setIdUsuarioHasta(Integer idUsuarioHasta) {
         this.idUsuarioHasta = idUsuarioHasta;
+    }
+
+    public TipoComida getTipoComida() {
+        return tipoComida;
+    }
+
+    public void setTipoComida(TipoComida tipoComida) {
+        this.tipoComida = tipoComida;
+    }
+
+    public List<RestauranteAmbiente> getRestauranteAmbientes() {
+        return restauranteAmbientes;
+    }
+
+    public void setRestauranteAmbientes(List<RestauranteAmbiente> restauranteAmbientes) {
+        this.restauranteAmbientes = restauranteAmbientes;
     }
 }

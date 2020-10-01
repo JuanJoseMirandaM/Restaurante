@@ -97,7 +97,7 @@ public class RestauranteController {
 
     private RestauranteDto convertToDto(Restaurante restaurante) {
         RestauranteDto restauranteDto = modelMapper.map(restaurante, RestauranteDto.class);
-        restauranteDto.setTipoComidaDto(modelMapper.map(restaurante.getTipoComida(), TipoComidaDto.class));
+        restauranteDto.setTipoComida(modelMapper.map(restaurante.getTipoComida(), TipoComidaDto.class));
         return restauranteDto;
     }
 
