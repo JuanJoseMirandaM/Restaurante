@@ -15,11 +15,7 @@ public class RestaunteService {
     @Autowired
     private RestauranteRepository restauranteRepository;
 
-    public List<Restaurante> getAll(){
-        return restauranteRepository.getAll();
-    }
-
-    public List<Restaurante> getAllRetaurantes(int pageNo, int pageSize, String sortBy) {
+    public List<Restaurante> getRestauranteList(int pageNo, int pageSize, String sortBy) {
         return restauranteRepository.getAllRestaurantes(pageNo, pageSize, sortBy);
     }
 

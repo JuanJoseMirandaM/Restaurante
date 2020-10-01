@@ -18,10 +18,6 @@ public class RestauranteRepository{
     @Autowired
     private RestauranteCrudRepository restauranteCrudRepository;
 
-    public List<Restaurante> getAll() {
-        return (List<Restaurante>) restauranteCrudRepository.findAll();
-    }
-
     public List<Restaurante> getAllRestaurantes(Integer pageNo, Integer pageSize, String sortBy) {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<Restaurante> pagedResult = restauranteCrudRepository.findAll(paging);

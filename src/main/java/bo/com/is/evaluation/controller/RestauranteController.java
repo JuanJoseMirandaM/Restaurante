@@ -26,13 +26,13 @@ public class RestauranteController {
     private ModelMapper modelMapper;
 
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<RestauranteDto>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sort)
     {
-        List<Restaurante> restaurantes = restaunteService.getAllRetaurantes(page, size, sort);
+        List<Restaurante> restaurantes = restaunteService.getRestauranteList(page, size, sort);
         List<RestauranteDto> restaurantesDto = restaurantes.stream().map(this::convertToDto).collect(Collectors.toList());
         return new ResponseEntity<>(restaurantesDto, HttpStatus.OK);
     }
@@ -47,8 +47,9 @@ public class RestauranteController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/estado/{estado}")
-    public ResponseEntity<List<RestauranteDto>> getByEstado(@PathVariable("estado") String estado){
+    @GetMapping("/list")
+    public ResponseEntity<List<RestauranteDto>> getByEstado(@RequestParam(defaultValue = "activo") String estado){
+        System.out.println(estado);
         return restaunteService.getByEstado(estado)
                 .map(restaurantes ->{
                     List<RestauranteDto> restaurantesDto = restaurantes.stream().map(this::convertToDto).collect(Collectors.toList());
