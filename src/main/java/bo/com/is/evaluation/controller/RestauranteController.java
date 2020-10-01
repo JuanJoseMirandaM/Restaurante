@@ -5,16 +5,14 @@ import bo.com.is.evaluation.model.entity.Restaurante;
 import bo.com.is.evaluation.service.RestaunteService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.text.ParseException;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -66,8 +64,12 @@ public class RestauranteController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<RestauranteDto> save(@RequestBody RestauranteDto restauranteDto) throws ParseException {
+    public ResponseEntity<RestauranteDto> save(@Valid @RequestBody RestauranteDto restauranteDto) throws ParseException {
         Restaurante restaurante = convertToEntity(restauranteDto);
+        restaurante.setFechaAlta(LocalDateTime.now());
+        restaurante.setIdUsuarioAlta(1);
+        restaurante.setFechaDesde(LocalDateTime.now());
+        restaurante.setIdUsuarioDesde(1);
         Restaurante postRestaurante = restaunteService.save(restaurante);
         return new ResponseEntity<>(convertToDto(postRestaurante), HttpStatus.CREATED);
     }
