@@ -50,14 +50,16 @@ public class RestauranteController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<RestauranteDto>> getByEstado(@RequestParam(defaultValue = "activo") String estado){
-        System.out.println(estado);
-        return restaunteService.getByEstado(estado)
-                .map(restaurantes ->{
-                    List<RestauranteDto> restaurantesDto = restaurantes.stream().map(this::convertToDto).collect(Collectors.toList());
-                    return new ResponseEntity<>(restaurantesDto, HttpStatus.OK);
-                })
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<List<RestauranteDto>> getByEstado(
+            @RequestParam(defaultValue = "activo") String estado,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sort
+    ){
+        List<Restaurante> restaurantesByEstado = restaunteService.getByEstado(estado, page, size, sort);
+        List<RestauranteDto> restaurantesDto = restaurantesByEstado.stream()
+                .map(this::convertToDto).collect(Collectors.toList());
+        return new ResponseEntity<>(restaurantesDto, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -70,10 +72,7 @@ public class RestauranteController {
     @PostMapping("/save")
     public ResponseEntity<RestauranteDto> save(@Valid @RequestBody RestauranteDto restauranteDto) throws ParseException {
         Restaurante restaurante = convertToEntity(restauranteDto);
-//        restaurante.getRestauranteAmbientes().forEach(tipoAmbiente -> tipoAmbiente.setRestaurante(restaurante));
-        restaurante.getRestauranteAmbientes().forEach(ra -> System.out.println(ra.getId()+"*"+ ra.getIdRestaurante()+"*"+ ra.getIdTipoAmbiente()));
         restaurante.getRestauranteAmbientes().forEach(tipoAmbiente -> {
-            System.out.println(tipoAmbiente.getId());
             tipoAmbiente.setRestaurante(restaurante);
             tipoAmbiente.setIdRestaurante(restaurante.getId());
             tipoAmbiente.setFechaAlta(LocalDateTime.now());

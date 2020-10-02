@@ -15,6 +15,8 @@ public interface RestauranteCrudRepository extends CrudRepository<Restaurante, I
     Iterable<Restaurante> findAll(Sort sort);
     Page<Restaurante> findAll(Pageable pageable);
 
+    Page<Restaurante> findByEstado(String estado,Pageable pageable);
+
     Optional<List<Restaurante>> findByIdTipoComida(int idTipoComida);
     Optional<List<Restaurante>> findByEstado(String estado);
 

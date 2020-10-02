@@ -33,8 +33,14 @@ public class RestauranteRepository{
         return restauranteCrudRepository.findByIdTipoComida(idTipoComida);
     }
 
-    public Optional<List<Restaurante>> getByEstado(String estado) {
-        return restauranteCrudRepository.findByEstado(estado);
+    public List<Restaurante> getByEstado(String estado, Integer page, Integer size, String sort, String sortDir) {
+        Pageable paging = PageRequest.of(page, size, Sort.by(sort) );
+        Page<Restaurante> pagedResult = restauranteCrudRepository.findByEstado(estado, paging);
+        if(pagedResult.hasContent()) {
+            return pagedResult.getContent();
+        } else {
+            return new ArrayList<Restaurante>();
+        }
     }
 
     public Optional<Restaurante> getRestaurante(int id){

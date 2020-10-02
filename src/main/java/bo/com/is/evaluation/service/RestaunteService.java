@@ -27,8 +27,8 @@ public class RestaunteService {
         return restauranteRepository.getByTipoComida(tipoComidaId);
     }
 
-    public Optional<List<Restaurante>> getByEstado(String estado){
-        return restauranteRepository.getByEstado(estado);
+    public List<Restaurante> getByEstado(String estado, int page, int size, String sort){
+        return restauranteRepository.getByEstado(estado, page, size, sort, sort);
     }
 
     public Optional<Restaurante> getData(String field, Object value){

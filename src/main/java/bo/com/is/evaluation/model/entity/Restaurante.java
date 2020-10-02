@@ -51,7 +51,6 @@ public class Restaurante {
     private String direccion;
 
     @Column(name = "id_tipo_comida")
-    @NotNull
     private Integer idTipoComida;
 
     @Column(name = "fecha_alta")
