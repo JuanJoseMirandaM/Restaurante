@@ -22,4 +22,6 @@ public interface RestauranteCrudRepository extends CrudRepository<Restaurante, I
 
     Optional<Restaurante> findByNombre(String nombre);
     Optional<Restaurante> findByTelefono(int telefono);
+
+
 }

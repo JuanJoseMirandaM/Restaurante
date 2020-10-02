@@ -15,8 +15,8 @@ public class RestaunteService {
     @Autowired
     private RestauranteRepository restauranteRepository;
 
-    public List<Restaurante> getRestauranteList(int pageNo, int pageSize, String sortBy) {
-        return restauranteRepository.getAllRestaurantes(pageNo, pageSize, sortBy);
+    public List<Restaurante> getRestauranteList(int page, int size, String sort, String sortDir) {
+        return restauranteRepository.getAllRestaurantes(page, size, sort, sortDir);
     }
 
     public Optional<Restaurante> getRestaurante(int restauranteId){
@@ -27,8 +27,8 @@ public class RestaunteService {
         return restauranteRepository.getByTipoComida(tipoComidaId);
     }
 
-    public List<Restaurante> getByEstado(String estado, int page, int size, String sort){
-        return restauranteRepository.getByEstado(estado, page, size, sort, sort);
+    public List<Restaurante> getByEstado(String estado, int page, int size, String sort, String sortDir){
+        return restauranteRepository.getByEstado(estado, page, size, sort, sortDir);
     }
 
     public Optional<Restaurante> getData(String field, Object value){
@@ -55,5 +55,9 @@ public class RestaunteService {
         }).orElse(
                 false
         );
+    }
+
+    public long count(){
+        return restauranteRepository.count();
     }
 }

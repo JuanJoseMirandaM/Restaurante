@@ -29,9 +29,10 @@ public class TipoComidaController {
     public ResponseEntity<List<TipoComidaDto>> getTipoComidaList(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id") String sort)
+            @RequestParam(defaultValue = "id") String sort, 
+            @RequestParam(defaultValue = "asc") String sortDir)
     {
-        List<TipoComida> tipoComidas = tipoComidaService.getTipoComidaList(page, size, sort);
+        List<TipoComida> tipoComidas = tipoComidaService.getTipoComidaList(page, size, sort, sortDir);
         List<TipoComidaDto> tipoComidasDto = tipoComidas.stream().map(this::convertToDto).collect(Collectors.toList());
         return new ResponseEntity<>(tipoComidasDto, HttpStatus.OK);
     }

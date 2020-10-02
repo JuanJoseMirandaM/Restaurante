@@ -19,9 +19,9 @@ public class TipoComidaService {
     @Autowired
     private TipoComidaRepository tipoComidaRepository;
 
-    public List<TipoComida> getTipoComidaList(int page, int size, String sort) {
+    public List<TipoComida> getTipoComidaList(int page, int size, String sort, String sortDir) {
 
-        Pageable paging = PageRequest.of(page, size, Sort.by(sort));
+        Pageable paging = PageRequest.of(page, size, Sort.Direction.fromString(sortDir), sort);
         Page<TipoComida> pagedResult = tipoComidaRepository.findAll(paging);
 
         if(pagedResult.hasContent()) {

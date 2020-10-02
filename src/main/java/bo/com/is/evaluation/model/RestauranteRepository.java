@@ -18,8 +18,8 @@ public class RestauranteRepository{
     @Autowired
     private RestauranteCrudRepository restauranteCrudRepository;
 
-    public List<Restaurante> getAllRestaurantes(Integer pageNo, Integer pageSize, String sortBy) {
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+    public List<Restaurante> getAllRestaurantes(Integer page, Integer size, String sort, String sortDir) {
+        Pageable paging = PageRequest.of(page, size, Sort.Direction.fromString(sortDir), sort);
         Page<Restaurante> pagedResult = restauranteCrudRepository.findAll(paging);
 
         if(pagedResult.hasContent()) {
@@ -34,7 +34,7 @@ public class RestauranteRepository{
     }
 
     public List<Restaurante> getByEstado(String estado, Integer page, Integer size, String sort, String sortDir) {
-        Pageable paging = PageRequest.of(page, size, Sort.by(sort) );
+        Pageable paging = PageRequest.of(page, size, Sort.Direction.fromString(sortDir), sort);
         Page<Restaurante> pagedResult = restauranteCrudRepository.findByEstado(estado, paging);
         if(pagedResult.hasContent()) {
             return pagedResult.getContent();
@@ -76,6 +76,10 @@ public class RestauranteRepository{
            default:
                return null;
        }
+    }
+
+    public long count() {
+        return restauranteCrudRepository.count();
     }
 
 }

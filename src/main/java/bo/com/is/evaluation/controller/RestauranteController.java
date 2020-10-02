@@ -6,12 +6,16 @@ import bo.com.is.evaluation.dto.TipoComidaDto;
 import bo.com.is.evaluation.model.entity.Restaurante;
 import bo.com.is.evaluation.model.entity.RestauranteAmbiente;
 import bo.com.is.evaluation.service.RestaunteService;
+import org.apache.catalina.connector.Response;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.time.LocalDateTime;
@@ -32,9 +36,10 @@ public class RestauranteController {
     public ResponseEntity<List<RestauranteDto>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id") String sort)
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "asc") String sortDir)
     {
-        List<Restaurante> restaurantes = restaunteService.getRestauranteList(page, size, sort);
+        List<Restaurante> restaurantes = restaunteService.getRestauranteList(page, size, sort, sortDir);
         List<RestauranteDto> restaurantesDto = restaurantes.stream().map(this::convertToDto).collect(Collectors.toList());
         return new ResponseEntity<>(restaurantesDto, HttpStatus.OK);
     }
@@ -54,9 +59,10 @@ public class RestauranteController {
             @RequestParam(defaultValue = "activo") String estado,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id") String sort
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "asc") String sortDir
     ){
-        List<Restaurante> restaurantesByEstado = restaunteService.getByEstado(estado, page, size, sort);
+        List<Restaurante> restaurantesByEstado = restaunteService.getByEstado(estado, page, size, sort, sortDir);
         List<RestauranteDto> restaurantesDto = restaurantesByEstado.stream()
                 .map(this::convertToDto).collect(Collectors.toList());
         return new ResponseEntity<>(restaurantesDto, HttpStatus.OK);
@@ -106,6 +112,12 @@ public class RestauranteController {
         }
     }
 
+    @GetMapping("/count")
+    @ResponseBody
+    public long countEntities() {
+        long count = restaunteService.count();
+        return count;
+    }
 
     private RestauranteDto convertToDto(Restaurante restaurante) {
         RestauranteDto restauranteDto = modelMapper.map(restaurante, RestauranteDto.class);

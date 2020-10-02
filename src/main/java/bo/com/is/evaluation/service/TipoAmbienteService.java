@@ -20,9 +20,9 @@ public class TipoAmbienteService {
     @Autowired
     private TipoAmbienteRepository tipoAmbienteRepository;
 
-    public List<TipoAmbiente> getTipoAmbienteList(int page, int size, String sort) {
+    public List<TipoAmbiente> getTipoAmbienteList(int page, int size, String sort, String sortDir) {
 
-        Pageable paging = PageRequest.of(page, size, Sort.by(sort));
+        Pageable paging = PageRequest.of(page, size, Sort.Direction.fromString(sortDir), sort);
         Page<TipoAmbiente> pagedResult = tipoAmbienteRepository.findAll(paging);
 
         if(pagedResult.hasContent()) {

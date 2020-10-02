@@ -32,9 +32,10 @@ public class TipoAmbienteController {
     public ResponseEntity<List<TipoAmbienteDto>> getTipoAmbienteList(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id") String sort)
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "asc") String sortDir)
     {
-        List<TipoAmbiente> tipoAmbientes = tipoAmbienteService.getTipoAmbienteList(page, size, sort);
+        List<TipoAmbiente> tipoAmbientes = tipoAmbienteService.getTipoAmbienteList(page, size, sort, sortDir);
         List<TipoAmbienteDto> tipoAmbientesDto = tipoAmbientes.stream().map(this::convertToDto).collect(Collectors.toList());
         return new ResponseEntity<>(tipoAmbientesDto, HttpStatus.OK);
     }
