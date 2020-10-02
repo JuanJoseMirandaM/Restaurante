@@ -15,7 +15,7 @@ public class RestauranteDto {
     private String direccion;
     private Integer idTipoComida;
     private TipoComidaDto tipoComida;
-//    private List<RestauranteAmbienteDto> restauranteAmbientes;
+    private List<RestauranteAmbienteDto> restauranteAmbientes;
 
     public Integer getId() {
         return id;
@@ -113,11 +113,11 @@ public class RestauranteDto {
         this.tipoComida = tipoComida;
     }
 
-//    public List<RestauranteAmbienteDto> getRestauranteAmbientes() {
-//        return restauranteAmbientes;
-//    }
-//
-//    public void setRestauranteAmbientes(List<RestauranteAmbienteDto> restauranteAmbientes) {
-//        this.restauranteAmbientes = restauranteAmbientes;
-//    }
+    public List<RestauranteAmbienteDto> getRestauranteAmbientes() {
+        return restauranteAmbientes;
+    }
+
+    public void setRestauranteAmbientes(List<RestauranteAmbienteDto> restauranteAmbientes) {
+        this.restauranteAmbientes = restauranteAmbientes;
+    }
 }

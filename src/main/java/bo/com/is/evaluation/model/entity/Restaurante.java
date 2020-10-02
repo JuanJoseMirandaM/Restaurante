@@ -78,7 +78,7 @@ public class Restaurante {
     @Column(name = "id_usuario_hasta")
     private Integer idUsuarioHasta;
 
-    @OneToMany(mappedBy = "restaurante")
+    @OneToMany(mappedBy = "restaurante", cascade = {CascadeType.ALL})
     private List<RestauranteAmbiente> restauranteAmbientes;
 
     @ManyToOne

@@ -1,8 +1,10 @@
 package bo.com.is.evaluation.controller;
 
+import bo.com.is.evaluation.dto.RestauranteAmbienteDto;
 import bo.com.is.evaluation.dto.RestauranteDto;
 import bo.com.is.evaluation.dto.TipoComidaDto;
 import bo.com.is.evaluation.model.entity.Restaurante;
+import bo.com.is.evaluation.model.entity.RestauranteAmbiente;
 import bo.com.is.evaluation.service.RestaunteService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +70,17 @@ public class RestauranteController {
     @PostMapping("/save")
     public ResponseEntity<RestauranteDto> save(@Valid @RequestBody RestauranteDto restauranteDto) throws ParseException {
         Restaurante restaurante = convertToEntity(restauranteDto);
+//        restaurante.getRestauranteAmbientes().forEach(tipoAmbiente -> tipoAmbiente.setRestaurante(restaurante));
+        restaurante.getRestauranteAmbientes().forEach(ra -> System.out.println(ra.getId()+"*"+ ra.getIdRestaurante()+"*"+ ra.getIdTipoAmbiente()));
+        restaurante.getRestauranteAmbientes().forEach(tipoAmbiente -> {
+            System.out.println(tipoAmbiente.getId());
+            tipoAmbiente.setRestaurante(restaurante);
+            tipoAmbiente.setIdRestaurante(restaurante.getId());
+            tipoAmbiente.setFechaAlta(LocalDateTime.now());
+            tipoAmbiente.setIdUsuarioAlta(1);
+            tipoAmbiente.setFechaDesde(LocalDateTime.now());
+            tipoAmbiente.setIdUsuarioDesde(1);
+        });
         restaurante.setFechaAlta(LocalDateTime.now());
         restaurante.setIdUsuarioAlta(1);
         restaurante.setFechaDesde(LocalDateTime.now());
@@ -100,11 +113,25 @@ public class RestauranteController {
         restauranteDto.setTipoComida(restaurante.getTipoComida()!=null?
                 modelMapper.map(restaurante.getTipoComida(), TipoComidaDto.class):
                 null);
+        List<RestauranteAmbienteDto> dtos = restaurante.getRestauranteAmbientes()!=null?
+                restaurante.getRestauranteAmbientes()
+                        .stream()
+                        .map(restauranteAmbiente -> modelMapper.map(restauranteAmbiente, RestauranteAmbienteDto.class))
+                        .collect(Collectors.toList()):
+                null;
+        restauranteDto.setRestauranteAmbientes(dtos);
         return restauranteDto;
     }
 
     private Restaurante convertToEntity(RestauranteDto restauranteDto) throws ParseException {
         Restaurante restaurante = modelMapper.map(restauranteDto, Restaurante.class);
+        List<RestauranteAmbiente> entitys = restauranteDto.getRestauranteAmbientes()!=null?
+                restauranteDto.getRestauranteAmbientes()
+                .stream()
+                .map(restauranteAmbienteDto -> modelMapper.map(restauranteAmbienteDto, RestauranteAmbiente.class))
+                .collect(Collectors.toList()) :
+                null;
+        restaurante.setRestauranteAmbientes(entitys);
         return restaurante;
     }
 }

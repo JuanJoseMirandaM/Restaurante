@@ -119,4 +119,37 @@ public class RestauranteAmbiente {
     public void setIdUsuarioHasta(Integer idUsuarioHasta) {
         this.idUsuarioHasta = idUsuarioHasta;
     }
+
+    public Integer getIdRestaurante() {
+        return idRestaurante;
+    }
+
+    public void setIdRestaurante(Integer idRestaurante) {
+        this.idRestaurante = idRestaurante;
+    }
+
+    public Integer getIdTipoAmbiente() {
+        return idTipoAmbiente;
+    }
+
+    public void setIdTipoAmbiente(Integer idTipoAmbiente) {
+        this.idTipoAmbiente = idTipoAmbiente;
+    }
+
+    public Restaurante getRestaurante() {
+        return restaurante;
+    }
+
+    public void setRestaurante(Restaurante restaurante) {
+        this.restaurante = restaurante;
+    }
+
+    public TipoAmbiente getTipoAmbiente() {
+        return tipoAmbiente;
+    }
+
+    public void setTipoAmbiente(TipoAmbiente tipoAmbiente) {
+        this.tipoAmbiente = tipoAmbiente;
+    }
+
 }
