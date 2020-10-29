@@ -58,7 +58,7 @@ public class RestauranteController {
     public ResponseEntity<List<RestauranteDto>> getByEstado(
             @RequestParam(defaultValue = "activo") String estado,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "100") int size,
             @RequestParam(defaultValue = "id") String sort,
             @RequestParam(defaultValue = "asc") String sortDir
     ){
